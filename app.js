@@ -37,6 +37,7 @@ class App {
     /** @param {number} days_life*/
     set_option_days_life(days_life) {
         _partial.env.options.days_life = vvs.toInt(days_life, _partial.env.options.days_life)
+        _partial.env.timer.delete_old_files_tick = 0
     }
 
     /** @param {boolean} write_to_console*/

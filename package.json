@@ -1,11 +1,14 @@
 {
   "name": "vv-logger-tiny",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "very-very simple logger for save logs to local files",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "doc": "type .readme.md > readme.md && jsdoc2md app.js >> readme.md",
+    "updatever": "npm version patch --no-git-tag-version",
+    "gitadd": "git add ./readme.md ./package.json ./package-lock.json"
   },
+  "pre-commit": "doc, updatever, gitadd",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VasilevVitalii/vv-logger-tiny.git"
@@ -16,7 +19,13 @@
     "url": "https://github.com/VasilevVitalii/vv-logger-tiny/issues"
   },
   "homepage": "https://github.com/VasilevVitalii/vv-logger-tiny#readme",
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.3",
+    "mocha": "^7.1.1",
+    "pre-commit": "^1.2.2"
+  },
   "dependencies": {
-    "vv-shared": "^2.0.12"
+    "fs-extra": "^9.0.0",
+    "vv-shared": "^2.0.14"
   }
 }
