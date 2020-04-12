@@ -1,6 +1,6 @@
 {
   "name": "vv-logger-tiny",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "very-very simple logger for save logs to local files",
   "main": "app.js",
   "scripts": {

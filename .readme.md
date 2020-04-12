@@ -4,9 +4,11 @@ npm i vv-logger-tiny
 ```
 ```js
 const lib_vvl = require('vv-logger-tiny')
-//warning!!! in file_name_mask supported only one date mask - ${yyyymmdd}!!!
-let vvl = new lib_vvl(__dirname, {level: 'trace', file_name_mask: 'app_${yyyymmdd}.log', days_life: 4, write_to_console: true})
-vvl.trace('hello, debug!')
+let vvl = new lib_vvl(__dirname)
+// or
+// let vvl = new lib_vvl(__dirname, {level: 'trace', file_name_mask: 'app_${yyyymmdd}.log', days_life: 4, write_to_console: true})
+// warning!!! in file_name_mask supported only one date mask - ${yyyymmdd}!!!
+vvl.trace('hello, trace!')
 vvl.debug('hello, debug!')
 vvl.error('hello, error!')
 vvl.error(new Error('hello, error!'))
