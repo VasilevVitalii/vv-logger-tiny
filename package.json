@@ -1,6 +1,6 @@
 {
   "name": "vv-logger-tiny",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "very-very simple logger for save logs to local files",
   "main": "app.js",
   "scripts": {
@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "vv-shared": "^2.0.14"
+    "vv-shared": "^2.0.23"
   }
 }

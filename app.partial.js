@@ -225,9 +225,9 @@ function delete_old_files(callback) {
     }
 
     if (env.timer.delete_old_files_tick > 10800) {
-        env.timer.delete_old_files_tick = 0    
+        env.timer.delete_old_files_tick = 0
     }
-    
+
     if (env.timer.delete_old_files_tick !== 0) {
         env.timer.delete_old_files_tick++
         callback()
@@ -235,7 +235,7 @@ function delete_old_files(callback) {
     }
     env.timer.delete_old_files_tick++
 
-    let now = Date()
+    let now = new Date()
 
     /** @type {string[]} */
     let undeletable_files = []
