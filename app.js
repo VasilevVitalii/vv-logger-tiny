@@ -10,7 +10,7 @@ const _partial = require('./app.partial.js')
 
 /**
  * logger options
- * @typedef type_options
+ * @typedef constructor_options
  * @property {string} [file_name_mask] mask file name for store logger, default = 'app_${yyyymmdd}.log', where '${yyyymmdd}' - date write log. if mask without '${yyyymmdd}', delete old log files not working
  * @property {number} [days_life] number of days for which log files will be stored, default = 4, only current date = 1, disable delete old log files = 0. you can change it in an already created class in method set_option_days_life
  * @property {boolean} [write_to_console] write log to file and console (true) or in file only (false), default = true. you can change it in an already created class in method set_option_write_to_console
@@ -19,9 +19,9 @@ const _partial = require('./app.partial.js')
 
 class App {
 
-    /** 
+    /**
      * @param {string} path where store log files, default = __dirname
-     * @param {type_options} [options] additional options
+     * @param {constructor_options} [options] additional options
      */
     constructor (path, options) {
         _partial.env.path = vvs.toString(path, _partial.env.path)

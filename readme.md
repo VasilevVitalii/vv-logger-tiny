@@ -3,18 +3,17 @@
 npm i vv-logger-tiny
 ```
 ```js
-const lib_vvl = require('vv-logger-tiny')
-let vvl = new lib_vvl(__dirname)
+const logger = require('vv-logger-tiny').create(__dirname)
 // or
-// let vvl = new lib_vvl(__dirname, {level: 'trace', file_name_mask: 'app_${yyyymmdd}.log', days_life: 4, write_to_console: true})
+// const logger = require('./index.js').create(__dirname, {level: 'trace', file_name_mask: 'app_${yyyymmdd}.log', days_life: 4, write_to_console: true})
 // warning!!! in file_name_mask supported only one date mask - ${yyyymmdd}!!!
-vvl.trace('hello, trace!')
-vvl.debug('hello, debug!')
-vvl.error('hello, error!')
-vvl.error(new Error('hello, error!'))
 
-vvl.debug('user {0} delete document #{1}', undefined, ['Mark', 42])
-vvl.error('error when user {0} delete document #{1}', new Error('some error'),['Mark', 42])
+logger.trace('hello, trace!')
+logger.debug('hello, debug!')
+logger.error('hello, error!')
+logger.error(new Error('hello, error!'))
+logger.debug('user {0} delete document #{1}', undefined, ['Mark', '42'])
+logger.error('error when user {0} delete document #{1}', new Error('some error'),['Mark', '42'])
 ```
 ## Classes
 
@@ -29,7 +28,7 @@ vvl.error('error when user {0} delete document #{1}', new Error('some error'),['
 <dt><a href="#type_log_level">type_log_level</a> : <code>&#x27;trace&#x27;</code> | <code>&#x27;debug&#x27;</code> | <code>&#x27;error&#x27;</code></dt>
 <dd><p>logger level, default = &#39;debug&#39;. if = &#39;trace&#39;, log work with [&#39;trace&#39;,&#39;debug&#39;,&#39;error&#39;], if = &#39;debug&#39; - [&#39;debug&#39;,&#39;error&#39;], if &#39;error&#39; - only &#39;error&#39;</p>
 </dd>
-<dt><a href="#type_options">type_options</a></dt>
+<dt><a href="#constructor_options">constructor_options</a></dt>
 <dd><p>logger options</p>
 </dd>
 </dl>
@@ -55,7 +54,7 @@ vvl.error('error when user {0} delete document #{1}', new Error('some error'),['
 | Param | Type | Description |
 | --- | --- | --- |
 | path | <code>string</code> | where store log files, default = __dirname |
-| [options] | [<code>type\_options</code>](#type_options) | additional options |
+| [options] | [<code>constructor\_options</code>](#constructor_options) | additional options |
 
 <a name="App+set_option_days_life"></a>
 
@@ -123,9 +122,9 @@ vvl.error('error when user {0} delete document #{1}', new Error('some error'),['
 logger level, default = 'debug'. if = 'trace', log work with ['trace','debug','error'], if = 'debug' - ['debug','error'], if 'error' - only 'error'
 
 **Kind**: global typedef  
-<a name="type_options"></a>
+<a name="constructor_options"></a>
 
-## type\_options
+## constructor\_options
 logger options
 
 **Kind**: global typedef  
