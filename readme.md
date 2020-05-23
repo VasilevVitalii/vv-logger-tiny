@@ -12,8 +12,8 @@ logger.trace('hello, trace!')
 logger.debug('hello, debug!')
 logger.error('hello, error!')
 logger.error(new Error('hello, error!'))
-logger.debug('user {0} delete document #{1}', undefined, ['Mark', '42'])
-logger.error('error when user {0} delete document #{1}', new Error('some error'),['Mark', '42'])
+logger.debug('user {0} delete document #{1}', {replace: ['Mark', '42']})
+logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'], traces: new Error('some error')})
 ```
 ## Classes
 
@@ -31,6 +31,9 @@ logger.error('error when user {0} delete document #{1}', new Error('some error')
 <dt><a href="#constructor_options">constructor_options</a></dt>
 <dd><p>logger options</p>
 </dd>
+<dt><a href="#message_options">message_options</a></dt>
+<dd><p>message options</p>
+</dd>
 </dl>
 
 <a name="App"></a>
@@ -40,12 +43,13 @@ logger.error('error when user {0} delete document #{1}', new Error('some error')
 
 * [App](#App)
     * [new App(path, [options])](#new_App_new)
+    * [._env](#App+_env) : <code>\_partial.type\_env</code>
     * [.set_option_days_life(days_life)](#App+set_option_days_life)
     * [.set_option_write_to_console(write_to_console)](#App+set_option_write_to_console)
     * [.set_option_level(level)](#App+set_option_level)
-    * [.trace(message, [attachments], [message_extra])](#App+trace)
-    * [.debug(message, [attachments], [message_extra])](#App+debug)
-    * [.error(message, [attachments], [message_extra])](#App+error)
+    * [.trace(message, [options])](#App+trace)
+    * [.debug(message, [options])](#App+debug)
+    * [.error(message, [options])](#App+error)
 
 <a name="new_App_new"></a>
 
@@ -56,6 +60,10 @@ logger.error('error when user {0} delete document #{1}', new Error('some error')
 | path | <code>string</code> | where store log files, default = __dirname |
 | [options] | [<code>constructor\_options</code>](#constructor_options) | additional options |
 
+<a name="App+_env"></a>
+
+### app.\_env : <code>\_partial.type\_env</code>
+**Kind**: instance property of [<code>App</code>](#App)  
 <a name="App+set_option_days_life"></a>
 
 ### app.set\_option\_days\_life(days_life)
@@ -85,36 +93,33 @@ logger.error('error when user {0} delete document #{1}', new Error('some error')
 
 <a name="App+trace"></a>
 
-### app.trace(message, [attachments], [message_extra])
+### app.trace(message, [options])
 **Kind**: instance method of [<code>App</code>](#App)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| message | <code>string</code> |  |
-| [attachments] | <code>string</code> \| <code>Error</code> \| <code>Array.&lt;string&gt;</code> \| <code>Array.&lt;Error&gt;</code> |  |
-| [message_extra] | <code>string</code> \| <code>Array.&lt;string&gt;</code> | for example: message = 'myparam1 = {0} myparam2 = {1}', message_extra = [4, 'hello'], text result = 'myparam1 = 4, myparam2 = hello' |
+| Param | Type |
+| --- | --- |
+| message | <code>string</code> | 
+| [options] | [<code>message\_options</code>](#message_options) | 
 
 <a name="App+debug"></a>
 
-### app.debug(message, [attachments], [message_extra])
+### app.debug(message, [options])
 **Kind**: instance method of [<code>App</code>](#App)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| message | <code>string</code> |  |
-| [attachments] | <code>string</code> \| <code>Error</code> \| <code>Array.&lt;string&gt;</code> \| <code>Array.&lt;Error&gt;</code> |  |
-| [message_extra] | <code>string</code> \| <code>Array.&lt;string&gt;</code> | for example: message = 'step #{0} where {1}', message_extra = [4, 'i create new file'], text result = 'step #4 where i create new file' |
+| Param | Type |
+| --- | --- |
+| message | <code>string</code> | 
+| [options] | [<code>message\_options</code>](#message_options) | 
 
 <a name="App+error"></a>
 
-### app.error(message, [attachments], [message_extra])
+### app.error(message, [options])
 **Kind**: instance method of [<code>App</code>](#App)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| message | <code>string</code> \| <code>Error</code> |  |
-| [attachments] | <code>string</code> \| <code>Error</code> \| <code>Array.&lt;string&gt;</code> \| <code>Array.&lt;Error&gt;</code> |  |
-| [message_extra] | <code>string</code> \| <code>Array.&lt;string&gt;</code> | for example: message = 'error #{0} when {1}', message_extra = [4, 'i create new file'], text result = 'error #4 when i create new file' |
+| Param | Type |
+| --- | --- |
+| message | <code>string</code> \| <code>Error</code> | 
+| [options] | [<code>message\_options</code>](#message_options) | 
 
 <a name="type_log_level"></a>
 
@@ -136,4 +141,17 @@ logger options
 | [days_life] | <code>number</code> | number of days for which log files will be stored, default = 4, only current date = 1, disable delete old log files = 0. you can change it in an already created class in method set_option_days_life |
 | [write_to_console] | <code>boolean</code> | write log to file and console (true) or in file only (false), default = true. you can change it in an already created class in method set_option_write_to_console |
 | level | [<code>type\_log\_level</code>](#type_log_level) | logger level, default = 'debug'. if = 'trace', log work with ['trace','debug','error'], if = 'debug' - ['debug','error'], if 'error' - only 'error'. you can change it in an already created class in method set_option_level |
+
+<a name="message_options"></a>
+
+## message\_options
+message options
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [replace] | <code>string</code> \| <code>Array.&lt;string&gt;</code> | for example: message = 'step #{0} where {1}', replace = [4, 'i create new file'], text result = 'step #4 where i create new file' |
+| [traces] | <code>string</code> \| <code>Error</code> \| <code>Array.&lt;string&gt;</code> \| <code>Array.&lt;Error&gt;</code> | big attachment to message, for example - error with full stack |
 

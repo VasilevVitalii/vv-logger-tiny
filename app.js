@@ -17,6 +17,13 @@ const _partial = require('./app.partial.js')
  * @property {type_log_level} level logger level, default = 'debug'. if = 'trace', log work with ['trace','debug','error'], if = 'debug' - ['debug','error'], if 'error' - only 'error'. you can change it in an already created class in method set_option_level
  */
 
+/**
+ * message options
+ * @typedef message_options
+ * @property {string|string[]} [replace] for example: message = 'step #{0} where {1}', replace = [4, 'i create new file'], text result = 'step #4 where i create new file'
+ * @property {string|Error|string[]|Error[]} [traces] big attachment to message, for example - error with full stack
+ */
+
 class App {
 
     /**
@@ -24,57 +31,72 @@ class App {
      * @param {constructor_options} [options] additional options
      */
     constructor (path, options) {
-        _partial.env.path = vvs.toString(path, _partial.env.path)
+
+        /** @type {_partial.type_env} */
+        this._env = {
+            path: vvs.toString(path, __dirname),
+            timer: {
+                timer: undefined,
+                delete_old_files_tick: 0,
+                timeout_msec: 1000
+            },
+            timer_first_start: false,
+            options: {
+                level: 'debug',
+                days_life: 4,
+                file_name_mask: vvs.findPropertyValueInObject(options, 'file_name_mask', 'app_${yyyymmdd}.log'),
+                write_to_console: true
+            },
+            buffer: []
+        }
+
         if (!vvs.isEmpty(options)) {
-            _partial.env.options.file_name_mask = vvs.toString(options.file_name_mask, _partial.env.options.file_name_mask)
             this.set_option_days_life(options.days_life)
             this.set_option_write_to_console(options.write_to_console)
             this.set_option_level(options.level)
         }
-        _partial.go()
+
+        _partial.go(this)
     }
 
     /** @param {number} days_life*/
     set_option_days_life(days_life) {
-        _partial.env.options.days_life = vvs.toInt(days_life, _partial.env.options.days_life)
-        _partial.env.timer.delete_old_files_tick = 0
+        this._env.options.days_life = vvs.toInt(days_life, this._env.options.days_life)
+        this._env.timer.delete_old_files_tick = 0
     }
 
     /** @param {boolean} write_to_console*/
     set_option_write_to_console(write_to_console) {
-        _partial.env.options.write_to_console = vvs.toBool(write_to_console, _partial.env.options.write_to_console)
+        this._env.options.write_to_console = vvs.toBool(write_to_console, this._env.options.write_to_console)
     }
 
     /** @param {type_log_level} level*/
     set_option_level(level) {
-        _partial.env.options.level = (level === 'trace' || level === 'debug' || level === 'error' ? level : _partial.env.options.level)
+        this._env.options.level = (level === 'trace' || level === 'debug' || level === 'error' ? level : this._env.options.level)
     }
 
     /**
      * @param {string} message
-     * @param {string|Error|string[]|Error[]} [attachments]
-     * @param {string|string[]} [message_extra] for example: message = 'myparam1 = {0} myparam2 = {1}', message_extra = [4, 'hello'], text result = 'myparam1 = 4, myparam2 = hello'
-     */    
-    trace(message, attachments, message_extra) {
-        _partial.log('trace', message, attachments, message_extra)
+     * @param {message_options} [options]
+     */
+    trace(message, options) {
+        _partial.log(this, 'trace', message, options)
     }
 
     /**
      * @param {string} message
-     * @param {string|Error|string[]|Error[]} [attachments]
-     * @param {string|string[]} [message_extra] for example: message = 'step #{0} where {1}', message_extra = [4, 'i create new file'], text result = 'step #4 where i create new file'
-     */    
-    debug(message, attachments, message_extra) {
-        _partial.log('debug', message, attachments, message_extra)
+     * @param {message_options} [options]
+     */
+    debug(message, options) {
+        _partial.log(this, 'debug', message, options)
     }
 
     /**
      * @param {string|Error} message
-     * @param {string|Error|string[]|Error[]} [attachments]
-     * @param {string|string[]} [message_extra] for example: message = 'error #{0} when {1}', message_extra = [4, 'i create new file'], text result = 'error #4 when i create new file'
-     */    
-    error(message, attachments, message_extra) {
-        _partial.log('error', message, attachments, message_extra)
+     * @param {message_options} [options]
+     */
+    error(message, options) {
+        _partial.log(this, 'error', message, options)
     }
 }
 
