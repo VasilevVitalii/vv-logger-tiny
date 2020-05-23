@@ -1,16 +1,19 @@
 //@ts-check
-const app = require('./app.js')
+const lib_app = require('./app.js')
 
 exports.create = create
 
 /**
- * @typedef {app.constructor_options} logger_constructor_options
+ * @typedef {lib_app} app
+ */
+/**
+ * @typedef {lib_app.constructor_options} options
  */
 
 /**
  * @param {string} path
- * @param {logger_constructor_options} [options]
+ * @param {options} [options]
  */
 function create(path, options) {
-    return new app(path, options)
+    return new lib_app(path, options)
 }
