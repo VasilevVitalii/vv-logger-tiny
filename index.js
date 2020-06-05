@@ -9,7 +9,9 @@ exports.create = create
 /**
  * @typedef {lib_app.constructor_options} options
  */
-
+/**
+ * @typedef {lib_app.message_options} message_options
+ */
 /**
  * @param {string} path
  * @param {options} [options]
