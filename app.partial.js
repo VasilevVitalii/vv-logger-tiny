@@ -61,7 +61,7 @@ function log(app, level, message, options) {
 
         switch(app._env.options.level) {
             case 'error':
-                if (!(level === 'error')) return
+                if (level !== 'error') return
                 break;
             case 'debug':
                 if (!(level === 'error' || level === 'debug')) return
