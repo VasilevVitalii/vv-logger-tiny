@@ -34,6 +34,8 @@ logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'
 <dt><a href="#message_options">message_options</a></dt>
 <dd><p>message options</p>
 </dd>
+<dt><a href="#callback_error">callback_error</a> : <code>function</code></dt>
+<dd></dd>
 </dl>
 
 <a name="App"></a>
@@ -50,6 +52,7 @@ logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'
     * [.trace(message, [options])](#App+trace)
     * [.debug(message, [options])](#App+debug)
     * [.error(message, [options])](#App+error)
+    * [.save_to_file_force([callback])](#App+save_to_file_force)
 
 <a name="new_App_new"></a>
 
@@ -121,6 +124,15 @@ logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'
 | message | <code>string</code> \| <code>Error</code> | 
 | [options] | [<code>message\_options</code>](#message_options) | 
 
+<a name="App+save_to_file_force"></a>
+
+### app.save\_to\_file\_force([callback])
+**Kind**: instance method of [<code>App</code>](#App)  
+
+| Param | Type |
+| --- | --- |
+| [callback] | [<code>callback\_error</code>](#callback_error) | 
+
 <a name="type_log_level"></a>
 
 ## type\_log\_level : <code>&#x27;trace&#x27;</code> \| <code>&#x27;debug&#x27;</code> \| <code>&#x27;error&#x27;</code>
@@ -154,4 +166,13 @@ message options
 | --- | --- | --- |
 | [replace] | <code>string</code> \| <code>Array.&lt;string&gt;</code> | for example: message = 'step #{0} where {1}', replace = [4, 'i create new file'], text result = 'step #4 where i create new file' |
 | [traces] | <code>string</code> \| <code>Error</code> \| <code>Array.&lt;string&gt;</code> \| <code>Array.&lt;Error&gt;</code> | big attachment to message, for example - error with full stack |
+
+<a name="callback_error"></a>
+
+## callback\_error : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
 

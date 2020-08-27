@@ -24,6 +24,11 @@ const _partial = require('./app.partial.js')
  * @property {string|Error|string[]|Error[]} [traces] big attachment to message, for example - error with full stack
  */
 
+/**
+ * @callback callback_error
+ * @param {Error} error
+ */
+
 class App {
 
     /**
@@ -97,6 +102,13 @@ class App {
      */
     error(message, options) {
         _partial.log(this, 'error', message, options)
+    }
+
+    /**
+     * @param {callback_error} [callback]
+     */
+    save_to_file_force(callback) {
+        _partial.save_to_file_force(this, callback)
     }
 }
 

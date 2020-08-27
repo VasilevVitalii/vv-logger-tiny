@@ -35,6 +35,7 @@ const app = require('./app.js')
 
 exports.go = go
 exports.log = log
+exports.save_to_file_force = save_to_file_force
 
 /**
  * @param {app} app
@@ -163,6 +164,26 @@ function go(app) {
             })
         })
     }, app._env.timer.timeout_msec)
+}
+
+/**
+ * @param {app} app
+ * @param {app.callback_error} [callback]
+ */
+function save_to_file_force(app, callback) {
+    lib_fs.ensureDir(app._env.path, undefined, error => {
+        if (!vvs.isEmpty(error)) {
+            if (vvs.isFunction(callback)) {
+                callback(error)
+            }
+            return
+        }
+        save_to_file(app, () => {
+            if (vvs.isFunction(callback)) {
+                callback(undefined)
+            }
+        })
+    })
 }
 
 /**
