@@ -47,7 +47,7 @@ function echo(app, type, message) {
     if (type === 'log') {
         console.log(vvs.toString(message,'').trim())
     } else if (type === 'error') {
-        console.error(vvs.toString(message,'').trim())
+        console.warn(vvs.toString(message,'').trim())
     }
 }
 
