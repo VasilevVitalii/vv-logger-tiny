@@ -86,6 +86,7 @@ function log(app, level, message, options) {
             text_detail: ''
         }
 
+
         if (!vvs.isEmpty(options)) {
             if (!vvs.isEmpty(options.replace)) {
                 let message_replace_list = vvs.toArray(options.replace)
@@ -115,7 +116,14 @@ function log(app, level, message, options) {
                 }
 
                 if (trace_list.length > 0) {
-                    buffered_message.text_detail = trace_list.join(lib_os.EOL.concat(lib_os.EOL))
+                    /** @type {string[]} */
+                    let text_detail = []
+                    trace_list.forEach((t, i) => {
+                        text_detail.push(' -> TRACE #'.concat(i.toString()))
+                        text_detail.push('    '.concat(t))
+                    })
+
+                    buffered_message.text_detail = text_detail.join(lib_os.EOL)
                 }
             }
         }
