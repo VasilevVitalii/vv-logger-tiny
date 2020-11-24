@@ -46,6 +46,7 @@ logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'
 * [App](#App)
     * [new App(path, [options])](#new_App_new)
     * [._env](#App+_env) : <code>\_partial.type\_env</code>
+    * [.get_path()](#App+get_path) ⇒ <code>string</code>
     * [.set_option_days_life(days_life)](#App+set_option_days_life)
     * [.set_option_write_to_console(write_to_console)](#App+set_option_write_to_console)
     * [.set_option_level(level)](#App+set_option_level)
@@ -67,6 +68,10 @@ logger.error('error when user {0} delete document #{1}', {replace: ['Mark', '42'
 
 ### app.\_env : <code>\_partial.type\_env</code>
 **Kind**: instance property of [<code>App</code>](#App)  
+<a name="App+get_path"></a>
+
+### app.get\_path() ⇒ <code>string</code>
+**Kind**: instance method of [<code>App</code>](#App)  
 <a name="App+set_option_days_life"></a>
 
 ### app.set\_option\_days\_life(days_life)

@@ -64,6 +64,13 @@ class App {
         _partial.go(this)
     }
 
+    /**
+     * @returns {string}
+     */
+    get_path() {
+        return this._env.path
+    }
+
     /** @param {number} days_life*/
     set_option_days_life(days_life) {
         this._env.options.days_life = vvs.toInt(days_life, this._env.options.days_life)
